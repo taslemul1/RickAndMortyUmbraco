@@ -43,7 +43,7 @@ Content
 - [.NET 8 SDK]
 - Visual Studio 2022 or VS Code to view source code
 
-### ▶️ Getting Started
+### Getting Started
 
 1. **Clone the Project**
    ```bash
