@@ -1,0 +1,14 @@
+{
+  "name": "Rick And Morty Character Importer",
+  "dashboards": [
+    {
+      "alias": "rickMortyDashboard",
+      "view": "~/App_Plugins/RickMortyDashboard/dashboard.html",
+      "sections": ["content"],
+      "weight": 10
+    }
+  ],
+  "javascript": [
+    "~/App_Plugins/RickMortyDashboard/RickMorty.controller.js"
+  ]
+}
