@@ -9,6 +9,8 @@ using System.Linq;
 using System.Text.Json.Serialization;
 using Umbraco.Cms.Core;
 using Umbraco.Cms.Core.Models;
+using RickAndMortyUmbraco.Models.RickAndMorty;
+using static Umbraco.Cms.Core.Collections.TopoGraph;
 
 namespace RickAndMortyApi.Controllers
 {
@@ -61,7 +63,7 @@ namespace RickAndMortyApi.Controllers
             var existingCharacters = _contentService.GetPagedChildren(container.Id, 0, int.MaxValue, out var totalChildren)
                         .ToList();
 
-            while (data.Info.Next != null)
+            while (data.Info != null && !string.IsNullOrEmpty(data.Info.Next))
             {
                 response = await client.GetAsync(data.Info.Next);
 
@@ -88,6 +90,8 @@ namespace RickAndMortyApi.Controllers
                 var existingNode = existingCharacters
                     .FirstOrDefault(x => x.GetValue<string>("rickAndMortyId") == character.Id.ToString());
 
+                int episodeCount = character.Episode?.Count ?? 0;
+
                 if (existingNode != null)
                 {
                     // Update existing node
@@ -95,6 +99,7 @@ namespace RickAndMortyApi.Controllers
                     existingNode.SetValue("status", character.Status);
                     existingNode.SetValue("species", character.Species);
                     existingNode.SetValue("gender", character.Gender);
+                    existingNode.SetValue("episodeCount", episodeCount);
                     _contentService.SaveAndPublish(existingNode);
                 }
 
@@ -102,11 +107,16 @@ namespace RickAndMortyApi.Controllers
                 {
                     // Create new node
                     created++;
+
+                    if (string.IsNullOrWhiteSpace(character.Name))
+                        continue;
+
                     var node = _contentService.Create(character.Name, container.Id, "character");
 
                     node.SetValue("status", character.Status);
                     node.SetValue("species", character.Species);
                     node.SetValue("gender", character.Gender);
+                    node.SetValue("episodeCount", episodeCount);
                     node.SetValue("rickAndMortyId", character.Id.ToString());
 
                     _contentService.SaveAndPublish(node);
@@ -118,46 +128,4 @@ namespace RickAndMortyApi.Controllers
 
     }
 
-    // Models used for JSON deserialization
-    public class ApiResponse
-    {
-        [JsonPropertyName("results")]
-        public List<Character> Results { get; set; }
-
-        [JsonPropertyName("info")]
-        public ApiInfo Info { get; set; }
-    }
-
-    public class ApiInfo
-    {
-        [JsonPropertyName("count")]
-        public int Count { get; set; }
-
-        [JsonPropertyName("pages")]
-        public int Pages { get; set; }
-
-        [JsonPropertyName("next")]
-        public string Next { get; set; }
-
-        [JsonPropertyName("prev")]
-        public string Prev { get; set; }
-    }
-
-    public class Character
-    {
-        [JsonPropertyName("id")]
-        public int Id { get; set; }
-
-        [JsonPropertyName("name")]
-        public string Name { get; set; }
-
-        [JsonPropertyName("status")]
-        public string Status { get; set; }
-
-        [JsonPropertyName("species")]
-        public string Species { get; set; }
-
-        [JsonPropertyName("gender")]
-        public string Gender { get; set; }
-    }
 }
