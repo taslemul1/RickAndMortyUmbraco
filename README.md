@@ -61,7 +61,9 @@ Content
    dotnet run
    ```
 
-   Navigate localhost provided in terminal
+5. Navigate localhost provided in terminal
+
+6. [rickMortyDashboard] for Importer
 
 ### `character`
 - Properties:
