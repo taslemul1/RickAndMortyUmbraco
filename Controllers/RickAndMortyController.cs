@@ -49,7 +49,7 @@ namespace RickAndMortyApi.Controllers
 
             allCharacters.AddRange(data.Results);
 
-            // Step 1: Find or create the Character Container
+            // Create or find Character Container
             var container = _contentService.GetRootContent()
                 .FirstOrDefault(x => x.ContentType.Alias == "characterContainer");
 

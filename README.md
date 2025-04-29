@@ -35,11 +35,13 @@ Content
     └── ...
 ```
 
+(Generates automatically when imported)
+
 ## How to Run the Project
 
 ###  Prerequisites
 - [.NET 8 SDK]
-- Visual Studio 2022 or VS Code
+- Visual Studio 2022 or VS Code to view source code
 
 ### ▶️ Getting Started
 
@@ -59,28 +61,17 @@ Content
    dotnet run
    ```
 
-   Navigate to: `https://localhost:44352/umbraco`
-
-5. **Initial Setup (on first run)**
-   - Follow Umbraco's installation steps in the browser.
-
-## 📁 Umbraco Setup Instructions
-
-1. Go to **Settings > Document Types** and create the following:
-
-### `characterContainer`
-- Allowed as root: ✅
-- Allows `character` as child nodes
+   Navigate localhost provided in terminal
 
 ### `character`
 - Properties:
   - `status` (Textstring)
   - `species` (Textstring)
   - `gender` (Textstring)
-  - `episodeCount` (Integer)
+  - `episodeCount` (Numeric)
   - `rickAndMortyId` (Textstring)
 
-## 📦 API Controller
+## API Controller
 
 This custom controller imports data from the Rick and Morty API:
 
@@ -89,17 +80,9 @@ This custom controller imports data from the Rick and Morty API:
 
 Handles pagination and safely updates or creates new nodes.
 
-## 🧠 Developer Notes
+## Notes
 
 - To modify character mapping, edit the model in:
   ```
   /Models/RickAndMorty/Character.cs
   ```
-
-- To change container name or alias, adjust logic in the controller.
-
-## 🎯 Bonus Features (Ideas)
-- Store episode names as tags or a multiline textbox
-- Add thumbnail image previews
-- Display import status in real-time using AngularJS in backoffice
-- Enable deletion/reset of character data
