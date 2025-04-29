@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.CodeAnalysis;
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 
@@ -44,8 +45,22 @@ namespace RickAndMortyUmbraco.Models.RickAndMorty
         [JsonPropertyName("image")]
         public string? Image { get; set; }
 
+        [JsonPropertyName("origin")]
+        public Location? Origin { get; set; }
+
+        [JsonPropertyName("location")]
+        public Location? Location { get; set; }
+
         [JsonPropertyName("episode")]
         public List<string>? Episode { get; set; }
     }
 
+    public class Location
+    {
+        [JsonPropertyName("name")]
+        public string? Name { get; set; }
+
+        [JsonPropertyName("url")]
+        public string? Url { get; set; }
+    }
 }

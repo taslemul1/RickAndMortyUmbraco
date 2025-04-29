@@ -10,7 +10,6 @@ using System.Text.Json.Serialization;
 using Umbraco.Cms.Core;
 using Umbraco.Cms.Core.Models;
 using RickAndMortyUmbraco.Models.RickAndMorty;
-using static Umbraco.Cms.Core.Collections.TopoGraph;
 
 namespace RickAndMortyApi.Controllers
 {
