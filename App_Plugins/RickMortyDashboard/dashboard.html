@@ -1,6 +1,13 @@
 ﻿<div ng-controller="RickMortyDashboardController as vm">
-  <h2>Rick and Morty Character Importer</h2>
-  <p>Click the button below to import characters into Umbraco.</p>
-  <button type="button" ng-click="vm.importCharacters()">Import Characters</button>
-  <p ng-if="vm.message">{{ vm.message }}</p>
+  <h2>Rick and Morty Importer</h2>
+
+  <p>{{ vm.message }}</p>
+
+  <button type="button" class="btn btn-primary" ng-click="vm.importCharacters()">
+	Import Characters
+  </button>
+
+  <button type="button" class="btn btn-secondary" ng-if="vm.showReload" ng-click="vm.reloadPage()">
+	Reload Page to view content tree
+  </button>
 </div>
