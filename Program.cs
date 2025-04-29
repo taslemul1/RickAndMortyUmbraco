@@ -7,6 +7,8 @@ builder.CreateUmbracoBuilder()
     .AddComposers()
     .Build();
 
+builder.Services.AddHttpClient();
+
 WebApplication app = builder.Build();
 
 await app.BootUmbracoAsync();
